@@ -1,5 +1,5 @@
-import { StatusBar } from 'react-native';
-import  OneSignal  from 'react-native-onesignal';
+import { StatusBar, Platform } from 'react-native';
+import OneSignal from 'react-native-onesignal';
 import { NativeBaseProvider } from 'native-base';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 
@@ -10,7 +10,10 @@ import { Loading } from './src/components/Loading';
 
 import { CartContextProvider } from './src/contexts/CartContext';
 
-OneSignal.setAppId('APP_ID');
+const oneSignalAppId = Platform.OS === 'ios' ? '2b542c58-e2e9-48f1-8bff-004caefe40c4' : 'bb68b7c0-8d9c-40f2-80e9-20a02124c7ff';
+OneSignal.setAppId(oneSignalAppId);
+
+OneSignal.promptForPushNotificationsWithUserResponse()
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
